@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualiseur d'Architecture de Dossier</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="top-controls">
+            <div class="lang-selector">
+                <button id="langBtn" class="lang-btn">
+                    <i class="fas fa-globe"></i>
+                    <span id="currentLang">FR</span>
+                </button>
+                <div class="lang-dropdown" id="langDropdown">
+                    <button class="lang-option" data-lang="fr"><span class="lang-code">FR</span> Français</button>
+                    <button class="lang-option" data-lang="en"><span class="lang-code">EN</span> English</button>
+                </div>
+            </div>
+            <div class="theme-selector">
+                <button id="themeBtn" class="theme-btn">
+                    <i class="fas fa-palette"></i>
+                </button>
+                <div class="theme-dropdown" id="themeDropdown">
+                    <button class="theme-option" data-theme="dark"><i class="fas fa-moon"></i> Dark</button>
+                    <button class="theme-option" data-theme="light"><i class="fas fa-sun"></i> Light</button>
+                    <button class="theme-option" data-theme="ocean"><i class="fas fa-water"></i> Ocean</button>
+                    <button class="theme-option" data-theme="forest"><i class="fas fa-tree"></i> Forest</button>
+                    <button class="theme-option" data-theme="sunset"><i class="fas fa-cloud-sun"></i> Sunset</button>
+                    <button class="theme-option" data-theme="cyberpunk"><i class="fas fa-gamepad"></i> Cyberpunk</button>
+                </div>
+            </div>
+            <button id="historyBtn" class="history-btn-top"><i class="fas fa-history"></i> <span data-i18n="history">Historique</span></button>
+        </div>
+        <header>
+            <h1><i class="fas fa-folder-tree"></i> <span data-i18n="title">Visualiseur d'Architecture</span></h1>
+            <p class="subtitle" data-i18n="subtitle">Glissez-déposez un dossier ou cliquez pour sélectionner</p>
+        </header>
+
+        <div class="drop-zone" id="dropZone">
+            <div class="drop-zone-content">
+                <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="7 10 12 15 17 10"></polyline>
+                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                <p class="drop-text" data-i18n="dropText">Glissez un dossier ici</p>
+                <p class="drop-subtext" data-i18n="or">ou</p>
+                <input type="file" id="folderInput" webkitdirectory directory multiple hidden>
+                <button class="select-btn" onclick="document.getElementById('folderInput').click()" data-i18n="selectFolder">
+                    Sélectionner un dossier
+                </button>
+            </div>
+        </div>
+
+        <div class="filter-container" id="filterContainer">
+            <div class="filter-header">
+                <h3 data-i18n="exclusions">Exclusions</h3>
+                <span class="filter-hint" data-i18n="filterHint">Séparez par des virgules (ex: node_modules, .git, *.log)</span>
+            </div>
+            <input type="text" id="excludeInput" class="exclude-input" placeholder="node_modules, .git, dist, *.log, .DS_Store" value="node_modules, .git, .vscode, .idea, dist, build, .DS_Store">
+            <div class="preset-buttons">
+                <button class="preset-btn" data-preset="default" data-i18n="presetDefault">Par défaut</button>
+                <button class="preset-btn" data-preset="minimal" data-i18n="presetMinimal">Minimal</button>
+                <button class="preset-btn" data-preset="none" data-i18n="presetNone">Aucun</button>
+                <button class="preset-btn" data-preset="media" data-i18n="presetMedia">Sans médias</button>
+                <button class="preset-btn" data-preset="dev" data-i18n="presetDev">Dev complet</button>
+            </div>
+        </div>
+
+        <div class="tree-container" id="treeContainer" style="display: none;">
+            <div class="tree-header">
+                <h2 id="folderName" data-i18n="folderStructure">Structure du dossier</h2>
+                <div class="stats" id="stats"></div>
+                <div class="search-container">
+                    <input type="text" id="searchInput" class="search-input" placeholder="Rechercher un fichier ou dossier..." data-i18n-placeholder="searchPlaceholder">
+                    <i class="fas fa-search search-icon"></i>
+                    <div class="search-controls">
+                        <span id="searchResults" class="search-results"></span>
+                        <button id="prevResult" class="nav-btn" style="display: none;">◀</button>
+                        <button id="nextResult" class="nav-btn" style="display: none;">▶</button>
+                    </div>
+                </div>
+                <div class="controls">
+                    <button id="copyBtn" class="control-btn primary"><i class="fas fa-copy"></i> <span data-i18n="copy">Copier</span></button>
+                    <div class="export-dropdown">
+                        <button id="exportBtn" class="control-btn"><i class="fas fa-download"></i> <span data-i18n="export">Exporter</span> <i class="fas fa-caret-down"></i></button>
+                        <div class="export-menu" id="exportMenu">
+                            <button class="export-option" data-format="txt"><i class="fas fa-file-alt"></i> Texte (.txt)</button>
+                            <button class="export-option" data-format="json"><i class="fas fa-file-code"></i> JSON (.json)</button>
+                            <button class="export-option" data-format="md"><i class="fab fa-markdown"></i> Markdown (.md)</button>
+                            <button class="export-option" data-format="csv"><i class="fas fa-file-csv"></i> CSV (.csv)</button>
+                        </div>
+                    </div>
+                    <button id="clearBtn" class="control-btn"><i class="fas fa-trash"></i> <span data-i18n="clear">Effacer</span></button>
+                </div>
+            </div>
+            <pre class="tree" id="tree"></pre>
+            
+            <div class="stats-section">
+                <button class="stats-toggle" id="statsToggle">
+                    <i class="fas fa-chart-pie"></i> <span data-i18n="advancedStats">Statistiques avancées</span>
+                    <i class="fas fa-chevron-down toggle-icon"></i>
+                </button>
+                <div class="stats-content" id="statsContent" style="display: none;">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <h3><i class="fas fa-code"></i> <span data-i18n="languageDistribution">Répartition par langage</span></h3>
+                            <canvas id="languageChart"></canvas>
+                        </div>
+                        <div class="stat-card">
+                            <h3><i class="fas fa-weight"></i> <span data-i18n="topFiles">Top 5 fichiers</span></h3>
+                            <div id="topFiles"></div>
+                        </div>
+                        <div class="stat-card">
+                            <h3><i class="fas fa-info-circle"></i> <span data-i18n="details">Détails</span></h3>
+                            <div id="detailsStats"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="history-modal" id="historyModal" style="display: none;">
+            <div class="history-content">
+                <div class="history-header">
+                    <h3><i class="fas fa-history"></i> <span data-i18n="analysisHistory">Historique des analyses</span></h3>
+                    <button id="closeHistory" class="close-btn">✕</button>
+                </div>
+                <div id="historyList" class="history-list"></div>
+                <button id="clearHistory" class="control-btn" data-i18n="clearHistory">Vider l'historique</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
