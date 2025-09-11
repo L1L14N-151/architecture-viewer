@@ -21,11 +21,6 @@ A modern web application to visualize and explore folder structures with an intu
 
 Open `index.html` in your browser - no installation required!
 
-## 📋 Prerequisites
-
-- Modern web browser (Chrome, Firefox, Safari, Edge)
-- File API support (standard in all modern browsers)
-
 ## 🎯 Usage
 
 1. Open `index.html` in your browser
@@ -86,7 +81,6 @@ View detailed statistics about your folder:
 - Pure HTML5, CSS3, JavaScript
 - Chart.js for statistics visualization
 - Font Awesome for icons
-- No backend required
 
 ## 📝 License
 
