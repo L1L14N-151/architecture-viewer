@@ -1,5 +1,7 @@
 # 📁 Folder Architecture Viewer
 
+🚀 **[Live Demo](https://architecture-viewer.vercel.app/)**
+
 A modern web application to visualize and explore folder structures with an intuitive interface. Simply drag and drop a folder to generate its architecture tree.
 
 ![Version](https://img.shields.io/badge/version-1.0.0-blue)
