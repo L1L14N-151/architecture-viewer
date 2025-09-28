@@ -1,97 +1,67 @@
 # 📁 Folder Architecture Viewer
 
-🚀 **[Live Demo](https://architecture-viewer.vercel.app/)**
+🚀 **Live Demo:** https://architecture-viewer.vercel.app/  
+🪪 MIT • v1.0.0
 
-A modern web application to visualize and explore folder structures with an intuitive interface. Simply drag and drop a folder to generate its architecture tree.
+## What it does
+Drag & drop a folder to visualize its tree, filter what you don’t need, search, view quick stats, and export.
 
-![Version](https://img.shields.io/badge/version-1.0.0-blue)
-![License](https://img.shields.io/badge/license-MIT-green)
+## Features
+- Drag & Drop (or click to select)
+- Smart filtering (presets & patterns)
+- Instant search
+- History (last 10 folders)
+- Stats: language distribution, top files, LOC
+- Themes (6): Dark, Light, Ocean, Forest, Sunset, Cyberpunk
+- Multilingual: EN/FR
+- Export: TXT, JSON, Markdown, CSV
+- One-click copy
 
-## ✨ Features
+## Quick start
+1) Open `index.html`  
+2) Drop a folder  
+3) Filter / search / export / copy
 
-- **Drag & Drop**: Simply drag your folder or click to select
-- **Smart Filtering**: Exclude unwanted files/folders with presets or custom patterns
-- **Multiple Export Formats**: TXT, JSON, Markdown, CSV
-- **Search**: Find files and folders quickly with real-time search
-- **History**: Keep track of your last 10 analyzed folders
-- **Advanced Statistics**: View language distribution, top files, and detailed metrics
-- **Themes**: 6 beautiful themes (Dark, Light, Ocean, Forest, Sunset, Cyberpunk)
-- **Multilingual**: Available in French and English
-- **Copy to Clipboard**: One-click copy of the entire tree structure
+**Filter examples:** `*.log`, `node_modules`, `test_*`  
+**Presets:** Default • Minimal • None • No Media • Full Dev
 
-## 🚀 Live Demo
+## Tech
+HTML5 • CSS3 • JavaScript (vanilla) • Chart.js • Font Awesome
 
-Open `index.html` in your browser - no installation required!
-
-## 🎯 Usage
-
-1. Open `index.html` in your browser
-2. Drag and drop a folder onto the drop zone
-3. View your folder structure instantly
-4. Use filters to exclude files/folders
-5. Export or copy the structure as needed
-
-### Exclusion Patterns
-
-Use wildcards to filter files:
-- `*.log` - excludes all .log files  
-- `node_modules` - excludes node_modules folder
-- `test_*` - excludes everything starting with test_
-
-### Preset Filters
-
-- **Default**: Common development files (.git, node_modules, etc.)
-- **Minimal**: Only .git and .DS_Store
-- **None**: No exclusions
-- **No Media**: Excludes images, videos, and audio files
-- **Full Dev**: Comprehensive development exclusions
-
-## 🎨 Themes
-
-Switch between 6 carefully crafted themes:
-- 🌙 **Dark** - Easy on the eyes
-- ☀️ **Light** - Clean and bright
-- 🌊 **Ocean** - Deep blue tones
-- 🌲 **Forest** - Natural green palette
-- 🌅 **Sunset** - Warm purple and pink
-- 🎮 **Cyberpunk** - Neon cyan and purple
-
-## 🌍 Languages
-
-The application supports:
-- 🇫🇷 French (Français)
-- 🇬🇧 English
-
-## 📊 Statistics
-
-View detailed statistics about your folder:
-- Language distribution (pie chart)
-- Top 5 largest files
-- Total lines of code
-- Average lines per file
-- Detected programming languages
-
-## 💾 Export Formats
-
-- **TXT**: Plain text tree structure
-- **JSON**: Structured data format
-- **Markdown**: GitHub-compatible tree
-- **CSV**: Spreadsheet-compatible format
-
-## 🛠️ Technologies
-
-- Pure HTML5, CSS3, JavaScript
-- Chart.js for statistics visualization
-- Font Awesome for icons
-
-## 📝 License
-
-MIT License - feel free to use in your projects!
-
-## 🤝 Contributing
-
-Contributions are welcome! Feel free to submit issues and pull requests.
+## License
+MIT — free to use.
 
 ---
 
-Made with ❤️ using vanilla JavaScript
+# 📁 Visualiseur d’Arborescence
+
+🚀 **Démo :** https://architecture-viewer.vercel.app/  
+🪪 MIT • v1.0.0
+
+## À quoi ça sert
+Glissez-déposez un dossier pour visualiser son arborescence, filtrer l’inutile, chercher, voir des stats rapides et exporter.
+
+## Fonctionnalités
+- Drag & Drop (ou clic pour choisir)
+- Filtres intelligents (préréglages & motifs)
+- Recherche instantanée
+- Historique (10 derniers dossiers)
+- Stats : répartition des langages, plus gros fichiers, lignes de code
+- Thèmes (6) : Sombre, Clair, Ocean, Forest, Sunset, Cyberpunk
+- Multilingue : FR/EN
+- Export : TXT, JSON, Markdown, CSV
+- Copie en un clic
+
+## Démarrage rapide
+1) Ouvrir `index.html`  
+2) Déposer un dossier  
+3) Filtrer / rechercher / exporter / copier
+
+**Exemples de filtres :** `*.log`, `node_modules`, `test_*`  
+**Préréglages :** Par défaut • Minimal • Aucun • Sans médias • Full Dev
+
+## Tech
+HTML5 • CSS3 • JavaScript (vanilla) • Chart.js • Font Awesome
+
+## Licence
+MIT — utilisation libre.
